@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>VITrendz</title>
+
+	<style type="text/css">
+
+		@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&display=swap');
+		
+
+		.center {
+			margin: auto;
+			width: 60%;
+			padding: 10px;
+			margin-top: 1%;
+			text-align: center;
+		}
+
+		.input {
+			border: solid 1px black;
+			width: 30%;
+			height: 30px;
+			border-radius: 4px;
+			margin: 10px;
+		}
+
+		.button:hover {
+  			box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+		}
+
+		.button {
+			background-color:#FFFFC3 ;
+			border: none;
+			color: #8A79AF;
+			padding: 10px 32px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 4px 2px;
+			cursor: pointer;
+			transition-duration: 0.2s;
+			border-radius: 8px;
+			margin: 5px;
+			font-family: 'Oswald', sans-serif;
+			font-weight: 600;
+		}
+
+		p{
+			font-family: 'Oswald', sans-serif;
+			font-size: 20px;
+			}
+
+		.image{
+			margin: auto;
+			width: 50%;
+			padding: 5px;
+			margin-top: 0%;
+			text-align: center;
+			background-image: url('https://vitrendz.com/static/media/logoNav.40b121d5.svg');
+			background-repeat: no-repeat;
+			background-position: center;
+			height: 100px;
+		}
+
+
+	</style>
+
+</head>
+<body bgcolor="#8A79AF">
+
+	<div class="image"></div>
+
+	
+	<div class="center">
+	
+		<form method="get" id="form">
+	        <input type="text" id="UserInput" placeholder="Enter Text" class="input" required>
+	        <br>
+	        <input type="submit" Value="Check Vowels" onClick="checkVowel(this.form)" class="button">
+	        <input type="submit" Value="Check Consonants" onClick="checkConsonant(this.form)" class="button">
+	        <input type="submit" Value="Check Lowercase" onClick="checkSmallLetter(this.form)" class="button">
+	        <input type="submit" Value="Check Uppercase" onClick="checkCapitalLetter(this.form)" class="button">
+	        <input type="submit" Value="Check Digits" onClick="checkDigit(this.form)" class="button">
+	        <input type="submit" Value="Check All" onClick="check(this.form)" class="button">
+	    </form>
+		
+	</div>
+
+	<div class="center" style="margin-top: 0%; text-align: left;">
+
+    <p id = "p1"></p>
+    <p id = 'vowel'></p>
+    <p id = 'consonant'></p>
+    <p id = 'smallLetter'></p>
+    <p id = 'capitalLetter'></p>
+    <p id = 'digit'></p>
+
+	</div>
+
+</body>
+
+
+	<script type="text/javascript">
+
+		function check(form) {		/* displays all outputs*/
+				checkVowel(form);
+				checkConsonant(form);
+				checkSmallLetter(form);
+				checkCapitalLetter(form); 
+				checkDigit(form);
+			}
+
+
+		function checkVowel(form) {		/* Checks and displays number of Vowels*/
+
+			event.preventDefault();
+
+			var strings = document.getElementById('UserInput').value;
+			console.log(strings);
+
+			document.getElementById('p1').innerHTML = "User Input = " + strings;
+
+			let count = 0;
+			var y = 'AEIOUaeiou'; 
+
+			for(var i = 0; i < strings.length ; i++) {		/* To abstract every single character of the string*/
+				x = strings[i];
+				if (checkSpace(x) == false) {
+					if (y.indexOf(x) !== -1) {
+						console.log(x);
+						count++;
+					}
+				}
+			}
+			document.getElementById('vowel').innerHTML = 'Vowels = ' + count;
+		}		
+
+
+		function checkConsonant(form) {		/* Checks and displays number of Consonants*/
+
+			event.preventDefault();
+
+			var strings = document.getElementById('UserInput').value;
+			console.log(strings);
+
+			document.getElementById('p1').innerHTML = "User Input = " + strings;
+
+			let count = 0;
+			var y = 'BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyz'; 
+
+			for(var i = 0; i < strings.length ; i++) {
+				x = strings[i];
+				if (checkSpace(x) == false) {
+					if (y.indexOf(x) !== -1) {
+						console.log(x);
+						count++;
+					}
+				}
+			}
+			document.getElementById('consonant').innerHTML = 'Consonants = ' + count;
+		}
+
+
+		function checkSmallLetter(form) {		/* Checks and displays number of Lowercaps letters*/
+
+			event.preventDefault();
+
+			var strings = document.getElementById('UserInput').value;
+			console.log(strings);
+
+			document.getElementById('p1').innerHTML = "User Input = " + strings;
+
+			let count = 0;
+
+				for(var i = 0; i < strings.length ; i++) {
+					x = strings[i];
+					if (checkSpace(x) == false) {
+						if (x == x.toLowerCase() && Digit(x) == false && checkSpecial(x) == false) {
+							console.log(x);
+							count++;
+						}
+					}
+				}
+			document.getElementById('smallLetter').innerHTML = 'Lower Case = ' + count;
+		}
+
+
+		function checkCapitalLetter(form) {		/* Checks and displays number of uppercaps letters*/
+
+			event.preventDefault();
+
+			var strings = document.getElementById('UserInput').value;
+			console.log(strings);
+
+			document.getElementById('p1').innerHTML = "User Input = " + strings;
+
+			let count = 0;
+
+			for(var i = 0; i < strings.length ; i++) {
+				x = strings[i];
+				if (checkSpace(x) == false) {
+					if (x == x.toUpperCase() && Digit(x) == false && checkSpecial(x) == false) {
+						console.log(x);
+						count++;
+					}
+				}
+			}
+			document.getElementById('capitalLetter').innerHTML = 'Upper Case = ' + count;
+		}
+
+
+		function checkDigit(form) {		/* Checks and displays number of Digits*/
+
+			event.preventDefault();
+
+			var strings = document.getElementById('UserInput').value;
+			console.log(strings);
+
+			document.getElementById('p1').innerHTML = "User Input = " + strings;
+
+			let count = 0;
+			for(var i = 0; i < strings.length ; i++) {
+				x = strings[i];
+				if (checkSpace(x) == false) {
+					if (Digit(x) == true) {
+						count++;
+					}
+				}
+			}
+			document.getElementById('digit').innerHTML = 'Digits = ' + count;
+		}
+
+
+		function Digit(x) {		/* Checks if the string is a number*/
+
+			if (!isNaN(x*1)) {
+				console.log(x);
+				return (true);
+				}
+			return(false);
+		}
+
+
+		function checkSpace(x) {	/* Checks if the string is an empty space*/
+
+			if (x == " ") {
+				return(true);
+			}
+			return(false);
+		}
+
+
+		function checkSpecial(x) {		/* Checks if there is a special character*/
+
+			var specialChar =  /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+
+			if (specialChar.test(x)) {
+				return(true);
+			}
+			return(false);
+		}
+
+		
+</script>
+
+
+
+</html>
